@@ -25,6 +25,12 @@ where options is an object with the following optional properties:
 | `Promise` | An A+ Promise implementation. Defaults to `window.Promise`. |
 | `XMLHttpRequest` | The XMLHttpRequest constructor. This is useful to feed in when working with Firefox OS. Defaults to `window.XMLHttpRequest`. |
 
+The `brfs` transform must be applied globally. Via the JS API this means:
+
+```javascript
+b.transform({global: true}, brfs);
+```
+
 ## Warning
 
 This module currently wraps [github/fetch](https://github.com/github/fetch) by tricking it into
