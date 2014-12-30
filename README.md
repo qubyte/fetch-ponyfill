@@ -11,9 +11,6 @@ function when `fetch-ponyfill` is required. Inspired by
 
 ## Usage
 
-In order to use this ponyfill, browserify must be using the
-[`brfs` transform](https://github.com/substack/brfs).
-
 ```javascript
 var fetch = require('fetch-ponyfill')(options);
 ```
