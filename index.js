@@ -2,9 +2,9 @@
 
 var functionBody = [
     '"use strict"',
-    'var window = {};',
-    require('fs').readFileSync(__dirname + '/node_modules/fetch/fetch.js', 'utf8'),
-    'return window.fetch;'
+    'var self = {};',
+    require('fs').readFileSync(__dirname + '/fetch.js', 'utf8'),
+    'return self.fetch;'
 ].join('\n');
 
 module.exports = function fetchPonyfill(options) {

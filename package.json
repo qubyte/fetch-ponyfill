@@ -1,6 +1,6 @@
 {
   "name": "fetch-ponyfill",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "fetch": "git://github.com/github/fetch#v0.3.2"
+    "brfs": "1.2.0"
+  },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
   }
 }
