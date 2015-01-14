@@ -26,6 +26,7 @@
   }
 
   Headers.prototype.append = function(name, value) {
+    name = name.toLowerCase()
     var list = this.map[name]
     if (!list) {
       list = []
@@ -35,24 +36,24 @@
   }
 
   Headers.prototype['delete'] = function(name) {
-    delete this.map[name]
+    delete this.map[name.toLowerCase()]
   }
 
   Headers.prototype.get = function(name) {
-    var values = this.map[name]
+    var values = this.map[name.toLowerCase()]
     return values ? values[0] : null
   }
 
   Headers.prototype.getAll = function(name) {
-    return this.map[name] || []
+    return this.map[name.toLowerCase()] || []
   }
 
   Headers.prototype.has = function(name) {
-    return this.map.hasOwnProperty(name)
+    return this.map.hasOwnProperty(name.toLowerCase())
   }
 
   Headers.prototype.set = function(name, value) {
-    this.map[name] = [value]
+    this.map[name.toLowerCase()] = [value]
   }
 
   // Instead of iterable for now.
@@ -70,43 +71,69 @@
     body.bodyUsed = true
   }
 
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result)
+      }
+      reader.onerror = function() {
+        reject(reader.error)
+      }
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader()
+    reader.readAsArrayBuffer(blob)
+    return fileReaderReady(reader)
+  }
+
+  function readBlobAsText(blob) {
+    var reader = new FileReader()
+    reader.readAsText(blob)
+    return fileReaderReady(reader)
+  }
+
+  var blobSupport = 'FileReader' in self && 'Blob' in self && (function() {
+    try {
+      new Blob();
+      return true
+    } catch(e) {
+      return false
+    }
+  })();
+
   function Body() {
-    this._body = null
     this.bodyUsed = false
 
-    this.arrayBuffer = function() {
-      throw new Error('Not implemented yet')
+    if (blobSupport) {
+      this.blob = function() {
+        var rejected = consumed(this)
+        return rejected ? rejected : Promise.resolve(this._bodyBlob)
+      }
+
+      this.arrayBuffer = function() {
+        return this.blob().then(readBlobAsArrayBuffer)
+      }
+
+      this.text = function() {
+        return this.blob().then(readBlobAsText)
+      }
+    } else {
+      this.text = function() {
+        var rejected = consumed(this)
+        return rejected ? rejected : Promise.resolve(this._bodyText)
+      }
     }
 
-    this.blob = function() {
-      var rejected = consumed(this)
-      return rejected ? rejected : Promise.resolve(new Blob([this._body]))
-    }
-
-    this.formData = function() {
-      var rejected = consumed(this)
-      return rejected ? rejected : Promise.resolve(decode(this._body))
+    if ('FormData' in self) {
+      this.formData = function() {
+        return this.text().then(decode)
+      }
     }
 
     this.json = function() {
-      var rejected = consumed(this)
-      if (rejected) {
-        return rejected
-      }
-
-      var body = this._body
-      return new Promise(function(resolve, reject) {
-        try {
-          resolve(JSON.parse(body))
-        } catch (ex) {
-          reject(ex)
-        }
-      })
-    }
-
-    this.text = function() {
-      var rejected = consumed(this)
-      return rejected ? rejected : Promise.resolve(this._body)
+      return this.text().then(JSON.parse)
     }
 
     return this
@@ -124,7 +151,7 @@
     options = options || {}
     this.url = url
     this._body = options.body
-    this.credentials = options.credentials || null
+    this.credentials = options.credentials || 'omit'
     this.headers = new Headers(options.headers)
     this.method = normalizeMethod(options.method || 'GET')
     this.mode = options.mode || null
@@ -171,9 +198,10 @@
         var options = {
           status: status,
           statusText: xhr.statusText,
-          headers: headers(xhr)
+          headers: headers(xhr),
+          url: xhr.responseURL || xhr.getResponseHeader('X-Request-URL')
         }
-        resolve(new Response(xhr.responseText, options))
+        resolve(new Response(blobSupport ? xhr.response: xhr.responseText, options))
       }
 
       xhr.onerror = function() {
@@ -181,6 +209,9 @@
       }
 
       xhr.open(self.method, self.url)
+      if (blobSupport) {
+        xhr.responseType = 'blob'
+      }
 
       self.headers.forEach(function(name, values) {
         values.forEach(function(value) {
@@ -194,18 +225,36 @@
 
   Body.call(Request.prototype)
 
-  function Response(body, options) {
-    this._body = body
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {}
+    }
+
+    if (blobSupport) {
+      if (typeof bodyInit === 'string') {
+        this._bodyBlob = new Blob([bodyInit])
+      } else {
+        this._bodyBlob = bodyInit
+      }
+    } else {
+      this._bodyText = bodyInit
+    }
     this.type = 'default'
     this.url = null
     this.status = options.status
     this.statusText = options.statusText
     this.headers = options.headers
+    this.url = options.url || ''
   }
 
   Body.call(Response.prototype)
 
+  self.Headers = Headers;
+  self.Request = Request;
+  self.Response = Response;
+
   self.fetch = function (url, options) {
     return new Request(url, options).fetch()
   }
+  self.fetch.polyfill = true
 })();
