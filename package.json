@@ -13,7 +13,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "brfs": "1.2.0"
+    "brfs": "1.4.0",
+    "whatwg-fetch": "0.7.0"
   },
   "browserify": {
     "transform": [

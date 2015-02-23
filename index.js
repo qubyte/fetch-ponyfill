@@ -3,7 +3,7 @@
 var functionBody = [
     '"use strict"',
     'var self = {};',
-    require('fs').readFileSync(__dirname + '/fetch.js', 'utf8'),
+    require('fs').readFileSync(require.resolve('whatwg-fetch'), 'utf8'),
     'return self.fetch;'
 ].join('\n');
 
