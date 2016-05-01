@@ -1,15 +1,26 @@
-'use strict';
+(function () {
+  'use strict';
+  
+  function fetchPonyfill(options) {
+    var Promise = options && options.Promise || self.Promise;
+    var XMLHttpRequest = options && options.XMLHttpRequest || self.XMLHttpRequest;
+  
+    return (function () {
+      var self = {};
 
-var functionBody = [
-    '"use strict"',
-    'var self = {};',
-    require('fs').readFileSync(require.resolve('whatwg-fetch'), 'utf8'),
-    'return self.fetch;'
-].join('\n');
+// {{whatwgFetch}}
 
-module.exports = function fetchPonyfill(options) {
-    var Promise = options && options.Promise || window.Promise;
-    var XMLHttpRequest = options && options.XMLHttpRequest || window.XMLHttpRequest;
+      return self.fetch;
+    }());
+  }
 
-    return new Function('Promise', 'XMLHttpRequest', functionBody)(Promise, XMLHttpRequest);
-};
+  if (typeof define === 'function' && define.amd) {
+    define(function () {
+      return fetchPonyfill;
+    });
+  } else if (typeof exports === 'object') {
+    module.exports = fetchPonyfill;
+  } else {
+    self.fetchPonyfill = fetchPonyfill;
+  }
+}());
