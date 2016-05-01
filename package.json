@@ -2,7 +2,8 @@
   "name": "fetch-ponyfill",
   "version": "0.9.0",
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
-  "main": "index.js",
+  "main": "fetch-node.js",
+  "browser": "fetch-browser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "brfs": "1.4.0",
+    "node-fetch": "1.5.1",
     "whatwg-fetch": "0.9.0"
   },
   "browserify": {
