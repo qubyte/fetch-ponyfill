@@ -21,7 +21,7 @@
   "devDependencies": {
     "mkdirp": "0.5.1",
     "rimraf": "2.5.2",
-    "whatwg-fetch": "0.9.0"
+    "whatwg-fetch": "1.0.0"
   },
   "files": [
     "fetch-node.js",
