@@ -3,9 +3,11 @@
   "version": "0.9.0",
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
   "main": "fetch-node.js",
-  "browser": "fetch-browser.js",
+  "browser": "build/fetch-browser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
+    "prepublish": "npm run build"
   },
   "author": "Mark Stanley Everitt",
   "repository": {
@@ -14,13 +16,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "brfs": "1.4.0",
-    "node-fetch": "1.5.1",
+    "node-fetch": "1.5.1"
+  },
+  "devDependencies": {
+    "mkdirp": "0.5.1",
+    "rimraf": "2.5.2",
     "whatwg-fetch": "0.9.0"
   },
-  "browserify": {
-    "transform": [
-      "brfs"
-    ]
-  }
+  "files": [
+    "fetch-node.js",
+    "build/fetch-browser.js"
+  ]
 }
