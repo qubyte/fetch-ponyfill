@@ -5,7 +5,7 @@
   "main": "fetch-node.js",
   "browser": "build/fetch-browser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/fetch-node.spec.js",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
     "prepublish": "npm run build"
   },
@@ -19,7 +19,11 @@
     "node-fetch": "1.5.1"
   },
   "devDependencies": {
+    "chai": "3.5.0",
     "mkdirp": "0.5.1",
+    "mocha": "2.4.5",
+    "nock": "8.0.0",
+    "promise": "7.1.1",
     "rimraf": "2.5.2",
     "whatwg-fetch": "1.0.0"
   },
