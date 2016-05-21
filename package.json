@@ -4,8 +4,16 @@
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
   "main": "fetch-node.js",
   "browser": "build/fetch-browser.js",
+  "config": {
+    "web_port": "8088"
+  },
   "scripts": {
     "test": "mocha tests/fetch-node.spec.js",
+    "browser_test_helper": "(sleep 1 && opener http://localhost:$npm_package_config_web_port/tests/fetch-browser.spec.html) && http-server -p $npm_package_config_web_port",
+    "pretest:browserify": "npm run build && browserify tests/fetch-browser.spec.js --outfile build/browser-test-bundle.js",
+    "test:browserify": "npm run browser_test_helper",
+    "pretest:webpack": "npm run build && webpack tests/fetch-browser.spec.js build/browser-test-bundle.js",
+    "test:webpack": "npm run browser_test_helper",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
     "prepublish": "npm run build"
   },
@@ -19,11 +27,15 @@
     "node-fetch": "1.5.1"
   },
   "devDependencies": {
+    "browserify": "13.0.0",
+    "http-server": "0.9.0",
     "mkdirp": "0.5.1",
     "mocha": "2.4.5",
     "nock": "8.0.0",
+    "opn": "4.0.1",
     "promise": "7.1.1",
     "rimraf": "2.5.2",
+    "webpack": "1.13.0",
     "whatwg-fetch": "1.0.0"
   },
   "files": [
