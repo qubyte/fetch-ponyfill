@@ -19,7 +19,6 @@
     "node-fetch": "1.5.1"
   },
   "devDependencies": {
-    "chai": "3.5.0",
     "mkdirp": "0.5.1",
     "mocha": "2.4.5",
     "nock": "8.0.0",
