@@ -1,10 +1,10 @@
 (function () {
   'use strict';
-  
+
   function fetchPonyfill(options) {
     var Promise = options && options.Promise || self.Promise;
     var XMLHttpRequest = options && options.XMLHttpRequest || self.XMLHttpRequest;
-  
+
     return (function () {
       var self = {};
 

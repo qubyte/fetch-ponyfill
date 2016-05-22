@@ -1,36 +1,103 @@
 var assert = require('assert');
-
-var fetch = require('../build/fetch-browser')();
-
-var good = 'hello world. 你好世界。\n';
+var sinon = require('sinon');
+var ThenPromise = require('promise');
+var fetchWrapper = require('../build/fetch-browser');
 
 function responseToText(response) {
-  if (response.status >= 400) throw new Error('Bad server response');
   return response.text();
 }
 
-describe('fetch', function() {
+describe('fetch in browser', function () {
+  var sandbox;
+  var server;
+  var requests;
 
-  it('should make requests', function (done) {
-    fetch('https://s3.amazonaws.com/bodylabs-edge/unittest/fetch/hello.1.0.0.txt')
-      .then(responseToText)
-      .then(function(data) {
-        assert.equal(data, good);
-
-        done();
-      })
-      .catch(done);
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create({ useFakeServer: true });
   });
 
-  it('should do the right thing with bad requests', function (done) {
-    fetch('https://s3.amazonaws.com/bodylabs-edge/nonexistent.txt')
-      .then(responseToText)
-      .catch(function(err) {
-        assert.equal(err.toString(), 'Error: Bad server response');
-
-        done();
-      })
-      .catch(done);
+  afterEach(function () {
+    sandbox.restore();
   });
 
+  describe('when called without a context', function () {
+    var promise;
+
+    beforeEach(function () {
+      var fetch = fetchWrapper();
+      sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
+      promise = fetch('https://blah.com/hello.world');
+      sandbox.server.respond();
+    });
+
+    it('makes requests', function () {
+      assert.equal(sandbox.server.requests.length, 1);
+    });
+
+    it('returns a promise', function () {
+      assert.ok(promise instanceof Promise);
+    });
+
+    it('resolves when the server responds', function () {
+      return promise
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, 'Some response text.');
+        });
+    });
+  });
+
+  describe('when called with a context without a Promise field', function () {
+    var promise;
+
+    beforeEach(function () {
+      var fetch = fetchWrapper({});
+      sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
+      promise = fetch('https://blah.com/hello.world');
+      sandbox.server.respond();
+    });
+
+    it('makes requests', function () {
+      assert.equal(sandbox.server.requests.length, 1);
+    });
+
+    it('returns a promise', function () {
+      assert.ok(promise instanceof Promise);
+    });
+
+    it('resolves when the server responds', function () {
+      return promise
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, 'Some response text.');
+        });
+    });
+  });
+
+  describe('when called with a context with a Promise field', function () {
+    var promise;
+
+    beforeEach(function () {
+      var fetch = fetchWrapper({Promise: ThenPromise});
+      sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
+      promise = fetch('https://blah.com/hello.world');
+      sandbox.server.respond();
+    });
+
+    it('makes requests', function () {
+      assert.equal(sandbox.server.requests.length, 1);
+    });
+
+    it('returns an instance of the given Promise constructor', function () {
+      assert.ok(promise instanceof ThenPromise);
+    });
+
+    it('resolves when the server responds', function () {
+      return promise
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, 'Some response text.');
+        });
+    });
+  });
 });
