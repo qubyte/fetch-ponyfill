@@ -1,0 +1,19 @@
+{
+    "env": {
+        "node": true,
+        "browser": true,
+        "amd": true
+    },
+    "extends": "vizia",
+    "rules": {
+        "strict": "off",
+        "no-extra-parens": "off",
+        "indent": ["error", 2],
+        "no-unused-vars": "off",
+        "no-sync": "off"
+    },
+    "globals": {
+      "Promise": true,
+      "XMLHttpRequest": true
+    }
+}
