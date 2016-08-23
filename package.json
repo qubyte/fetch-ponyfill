@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "1.5.1"
+    "node-fetch": "1.6.0"
   },
   "devDependencies": {
     "browserify": "13.0.0",
