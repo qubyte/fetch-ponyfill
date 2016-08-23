@@ -18,8 +18,8 @@ function responseToText(response) {
   return response.text();
 }
 
-describe('fetch in Node', function() {
-  beforeEach(function() {
+describe('fetch in Node', function () {
+  beforeEach(function () {
     nock('https://mattandre.ws')
       .get('/succeed.txt')
       .reply(200, good);
@@ -32,28 +32,38 @@ describe('fetch in Node', function() {
   afterEach(function () {
     nock.cleanAll();
   });
-  
+
   describe('when called without a context', function () {
     var fetch;
-    
+
     before(function () {
       fetch = fetchWrapper();
     });
-    
-    it('uess the built-in promise implementation', function () {
-      assert.ok(fetch('https://mattandre.ws/succeed.txt') instanceof Promise);
+
+    it('uses the built-in promise implementation', function () {
+      assert.ok(fetch.fetch('https://mattandre.ws/succeed.txt') instanceof Promise);
+    });
+
+    it('exposes fetch, and Request, Response, and Headers methods', function () {
+      assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('returns a promise which resolves to an instance of Response', function () {
+      return fetch.fetch('https://mattandre.ws/succeed.txt').then(function (res) {
+        assert.ok(res instanceof fetch.Response);
+      });
     });
 
     it('makes requests', function () {
-      return fetch('https://mattandre.ws/succeed.txt')
+      return fetch.fetch('https://mattandre.ws/succeed.txt')
         .then(responseToText)
-        .then(function(data) {
+        .then(function (data) {
           assert.equal(data, good);
         });
     });
 
     it('rejects with an error on a bad request', function () {
-      return fetch('https://mattandre.ws/fail.txt')
+      return fetch.fetch('https://mattandre.ws/fail.txt')
         .then(responseToText)
         .then(
           function () {
@@ -66,35 +76,53 @@ describe('fetch in Node', function() {
     });
 
     it('supports schemaless URIs', function () {
-      return fetch('//mattandre.ws/succeed.txt')
+      return fetch.fetch('//mattandre.ws/succeed.txt')
         .then(responseToText)
-        .then(function(data) {
+        .then(function (data) {
+          assert.equal(data, good);
+        });
+    });
+
+    it('supports request instances', function () {
+      return fetch.fetch(new fetch.Request('https://mattandre.ws/succeed.txt'))
+        .then(responseToText)
+        .then(function (data) {
           assert.equal(data, good);
         });
     });
   });
-  
+
   describe('when called with a context with no Promise field', function () {
     var fetch;
-    
+
     before(function () {
       fetch = fetchWrapper({});
     });
-    
-    it('uess the built-in promise implementation', function () {
-      assert.ok(fetch('https://mattandre.ws/succeed.txt') instanceof Promise);
+
+    it('exposes fetch, and Request, Response, and Headers methods', function () {
+      assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('returns a promise which resolves to an instance of Response', function () {
+      return fetch.fetch('https://mattandre.ws/succeed.txt').then(function (res) {
+        assert.ok(res instanceof fetch.Response);
+      });
+    });
+
+    it('uses the built-in promise implementation', function () {
+      assert.ok(fetch.fetch('https://mattandre.ws/succeed.txt') instanceof Promise);
     });
 
     it('makes requests', function () {
-      return fetch('https://mattandre.ws/succeed.txt')
+      return fetch.fetch('https://mattandre.ws/succeed.txt')
         .then(responseToText)
-        .then(function(data) {
+        .then(function (data) {
           assert.equal(data, good);
         });
     });
 
     it('rejects with an error on a bad request', function () {
-      return fetch('https://mattandre.ws/fail.txt')
+      return fetch.fetch('https://mattandre.ws/fail.txt')
         .then(responseToText)
         .then(
           function () {
@@ -107,9 +135,17 @@ describe('fetch in Node', function() {
     });
 
     it('supports schemaless URIs', function () {
-      return fetch('//mattandre.ws/succeed.txt')
+      return fetch.fetch('//mattandre.ws/succeed.txt')
         .then(responseToText)
-        .then(function(data) {
+        .then(function (data) {
+          assert.equal(data, good);
+        });
+    });
+
+    it('supports request instances', function () {
+      return fetch.fetch(new fetch.Request('https://mattandre.ws/succeed.txt'))
+        .then(responseToText)
+        .then(function (data) {
           assert.equal(data, good);
         });
     });
@@ -117,25 +153,35 @@ describe('fetch in Node', function() {
 
   describe('when called with a context with a Promise field', function () {
     var fetch;
-    
+
     before(function () {
-      fetch = fetchWrapper({ Promise: ThenPromise });
+      fetch = fetchWrapper({Promise: ThenPromise});
     });
-    
+
+    it('exposes fetch, and Request, Response, and Headers methods', function () {
+      assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('returns a promise which resolves to an instance of Response', function () {
+      return fetch.fetch('https://mattandre.ws/succeed.txt').then(function (res) {
+        assert.ok(res instanceof fetch.Response);
+      });
+    });
+
     it('uses the a given promise implementation', function () {
-      assert.ok(fetch('https://mattandre.ws/succeed.txt') instanceof ThenPromise);
+      assert.ok(fetch.fetch('https://mattandre.ws/succeed.txt') instanceof ThenPromise);
     });
 
     it('makes requests', function () {
-      return fetch('https://mattandre.ws/succeed.txt')
+      return fetch.fetch('https://mattandre.ws/succeed.txt')
         .then(responseToText)
-        .then(function(data) {
+        .then(function (data) {
           assert.equal(data, good);
         });
     });
 
     it('rejects with an error on a bad request', function () {
-      return fetch('https://mattandre.ws/fail.txt')
+      return fetch.fetch('https://mattandre.ws/fail.txt')
         .then(responseToText)
         .then(
           function () {
@@ -148,9 +194,17 @@ describe('fetch in Node', function() {
     });
 
     it('supports schemaless URIs', function () {
-      return fetch('//mattandre.ws/succeed.txt')
+      return fetch.fetch('//mattandre.ws/succeed.txt')
         .then(responseToText)
-        .then(function(data) {
+        .then(function (data) {
+          assert.equal(data, good);
+        });
+    });
+
+    it('supports request instances', function () {
+      return fetch.fetch(new fetch.Request('https://mattandre.ws/succeed.txt'))
+        .then(responseToText)
+        .then(function (data) {
           assert.equal(data, good);
         });
     });
