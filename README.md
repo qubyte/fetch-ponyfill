@@ -14,7 +14,7 @@ When used in Node, delegates to `node-fetch` instead.
 ## Usage
 
 ```javascript
-var fetch = require('fetch-ponyfill')(options);
+const {fetch, Request, Response, Headers} = require('fetch-ponyfill')(options);
 ```
 
 where options is an object with the following optional properties:
