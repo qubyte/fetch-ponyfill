@@ -12,7 +12,7 @@
 // {{whatwgFetch}}
 
       return {
-        fetch: self.fetch,
+        fetch: self.fetch.bind(global),
         Headers: self.Headers,
         Request: self.Request,
         Response: self.Response
