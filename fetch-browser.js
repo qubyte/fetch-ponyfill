@@ -4,9 +4,10 @@
   function fetchPonyfill(options) {
     var Promise = options && options.Promise || self.Promise;
     var XMLHttpRequest = options && options.XMLHttpRequest || self.XMLHttpRequest;
+    var global = self;
 
     return (function () {
-      var self = {};
+      var self = Object.create(global);
 
 // {{whatwgFetch}}
 
