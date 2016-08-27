@@ -1,5 +1,6 @@
+/* global sinon */
+
 var assert = require('assert');
-var sinon = require('sinon');
 var ThenPromise = require('promise');
 var fetchWrapper = require('../build/fetch-browser');
 
