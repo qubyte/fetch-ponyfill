@@ -10,13 +10,16 @@ function responseToText(response) {
 
 describe('fetch in browser', function () {
   var sandbox;
+  var nativeFetch = self.fetch;
 
   beforeEach(function () {
     sandbox = sinon.sandbox.create({useFakeServer: true});
     sandbox.server.autoRespond = true;
+    self.fetch = sandbox.stub();
   });
 
   afterEach(function () {
+    self.fetch = nativeFetch;
     sandbox.restore();
   });
 
@@ -33,6 +36,10 @@ describe('fetch in browser', function () {
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
       assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('does not expose native fetch when available', function () {
+      assert.notEqual(self.fetch, fetch.fetch);
     });
 
     it('returns a native promise instance which resolves to an instance of Response', function () {
@@ -79,6 +86,10 @@ describe('fetch in browser', function () {
       assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
     });
 
+    it('does not expose native fetch when available', function () {
+      assert.notEqual(self.fetch, fetch.fetch);
+    });
+
     it('returns a native promise instance which resolves to an instance of Response', function () {
       assert.ok(promise instanceof Promise);
 
@@ -121,6 +132,10 @@ describe('fetch in browser', function () {
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
       assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('does not expose native fetch when available', function () {
+      assert.notEqual(self.fetch, fetch.fetch);
     });
 
     it('returns an instance of the given promise constructor which resolves to an instance of Response', function () {
