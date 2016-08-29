@@ -11,6 +11,7 @@ function responseToText(response) {
 describe('fetch in browser', function () {
   var sandbox;
   var nativeFetch = self.fetch;
+  var nativeBlob = self.Blob;
 
   beforeEach(function () {
     sandbox = sinon.sandbox.create({useFakeServer: true});
@@ -20,6 +21,7 @@ describe('fetch in browser', function () {
 
   afterEach(function () {
     self.fetch = nativeFetch;
+    self.Blob = nativeBlob;
     sandbox.restore();
   });
 
@@ -67,6 +69,20 @@ describe('fetch in browser', function () {
         .then(responseToText)
         .then(function (data) {
           assert.equal(data, 'Some other response text.');
+        });
+    });
+
+    it('allows whatwg-fetch to feature detect properly', function () {
+      self.Blob = function () {};
+
+      var fetch = fetchWrapper();
+
+      return fetch.fetch('https://blah.com/goodbye.world')
+        .then(function (res) {
+          return res.blob();
+        })
+        .then(function (blob) {
+          assert.ok(blob instanceof self.Blob);
         });
     });
   });
@@ -117,6 +133,20 @@ describe('fetch in browser', function () {
           assert.equal(data, 'Some other response text.');
         });
     });
+
+    it('allows whatwg-fetch to feature detect properly', function () {
+      self.Blob = function () {};
+
+      var fetch = fetchWrapper({});
+
+      return fetch.fetch('https://blah.com/goodbye.world')
+        .then(function (res) {
+          return res.blob();
+        })
+        .then(function (blob) {
+          assert.ok(blob instanceof self.Blob);
+        });
+    });
   });
 
   describe('when called with a context with a Promise field', function () {
@@ -163,6 +193,20 @@ describe('fetch in browser', function () {
         .then(responseToText)
         .then(function (data) {
           assert.equal(data, 'Some other response text.');
+        });
+    });
+
+    it('allows whatwg-fetch to feature detect properly', function () {
+      self.Blob = function () {};
+
+      var fetch = fetchWrapper({Promise: ThenPromise});
+
+      return fetch.fetch('https://blah.com/goodbye.world')
+        .then(function (res) {
+          return res.blob();
+        })
+        .then(function (blob) {
+          assert.ok(blob instanceof self.Blob);
         });
     });
   });
