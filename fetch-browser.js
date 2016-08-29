@@ -7,7 +7,12 @@
     var global = self;
 
     return (function () {
-      var self = Object.create(global, {fetch: {value: undefined}});
+      var self = Object.create(global, {
+        fetch: {
+          value: undefined,
+          writable: true
+        }
+      });
 
 // {{whatwgFetch}}
 
