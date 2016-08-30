@@ -1,5 +1,6 @@
+/* global sinon */
+
 var assert = require('assert');
-var sinon = require('sinon');
 var ThenPromise = require('promise');
 var fetchWrapper = require('../build/fetch-browser');
 
@@ -9,13 +10,18 @@ function responseToText(response) {
 
 describe('fetch in browser', function () {
   var sandbox;
+  var nativeFetch = self.fetch;
+  var nativeBlob = self.Blob;
 
   beforeEach(function () {
     sandbox = sinon.sandbox.create({useFakeServer: true});
     sandbox.server.autoRespond = true;
+    self.fetch = sandbox.stub();
   });
 
   afterEach(function () {
+    self.fetch = nativeFetch;
+    self.Blob = nativeBlob;
     sandbox.restore();
   });
 
@@ -32,6 +38,10 @@ describe('fetch in browser', function () {
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
       assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('does not expose native fetch when available', function () {
+      assert.notEqual(self.fetch, fetch.fetch);
     });
 
     it('returns a native promise instance which resolves to an instance of Response', function () {
@@ -59,6 +69,20 @@ describe('fetch in browser', function () {
         .then(responseToText)
         .then(function (data) {
           assert.equal(data, 'Some other response text.');
+        });
+    });
+
+    it('allows whatwg-fetch to feature detect properly', function () {
+      self.Blob = function () {};
+
+      var fetch = fetchWrapper();
+
+      return fetch.fetch('https://blah.com/goodbye.world')
+        .then(function (res) {
+          return res.blob();
+        })
+        .then(function (blob) {
+          assert.ok(blob instanceof self.Blob);
         });
     });
   });
@@ -78,6 +102,10 @@ describe('fetch in browser', function () {
       assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
     });
 
+    it('does not expose native fetch when available', function () {
+      assert.notEqual(self.fetch, fetch.fetch);
+    });
+
     it('returns a native promise instance which resolves to an instance of Response', function () {
       assert.ok(promise instanceof Promise);
 
@@ -105,6 +133,20 @@ describe('fetch in browser', function () {
           assert.equal(data, 'Some other response text.');
         });
     });
+
+    it('allows whatwg-fetch to feature detect properly', function () {
+      self.Blob = function () {};
+
+      var fetch = fetchWrapper({});
+
+      return fetch.fetch('https://blah.com/goodbye.world')
+        .then(function (res) {
+          return res.blob();
+        })
+        .then(function (blob) {
+          assert.ok(blob instanceof self.Blob);
+        });
+    });
   });
 
   describe('when called with a context with a Promise field', function () {
@@ -120,6 +162,10 @@ describe('fetch in browser', function () {
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
       assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+    });
+
+    it('does not expose native fetch when available', function () {
+      assert.notEqual(self.fetch, fetch.fetch);
     });
 
     it('returns an instance of the given promise constructor which resolves to an instance of Response', function () {
@@ -147,6 +193,20 @@ describe('fetch in browser', function () {
         .then(responseToText)
         .then(function (data) {
           assert.equal(data, 'Some other response text.');
+        });
+    });
+
+    it('allows whatwg-fetch to feature detect properly', function () {
+      self.Blob = function () {};
+
+      var fetch = fetchWrapper({Promise: ThenPromise});
+
+      return fetch.fetch('https://blah.com/goodbye.world')
+        .then(function (res) {
+          return res.blob();
+        })
+        .then(function (blob) {
+          assert.ok(blob instanceof self.Blob);
         });
     });
   });
