@@ -1,8 +1,6 @@
 # Fetch Ponyfill
 
-> WHATWG `fetch` ponyfill
->
-> Ponyfill: A polyfill that doesn't overwrite the native method.
+> WHATWG `fetch` [ponyfill](https://ponyfill.com)
 
 This module wraps the [github/fetch](https://github.com/github/fetch) polyfill in a CommonJS module
 for browserification, and avoids appending anything to the window, instead returning a setup
