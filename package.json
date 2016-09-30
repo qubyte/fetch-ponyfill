@@ -24,6 +24,10 @@
     "url": "git://github.com/qubyte/fetch-ponyfill.git"
   },
   "license": "MIT",
+  "keywords": [
+    "fetch",
+    "ponyfill"
+  ],
   "dependencies": {
     "node-fetch": "1.6.0"
   },
