@@ -25,22 +25,22 @@
   },
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "1.6.0"
+    "node-fetch": "~1.6.0"
   },
   "devDependencies": {
-    "browserify": "13.0.0",
-    "eslint": "3.3.1",
-    "eslint-config-vizia": "1.1.2",
-    "http-server": "0.9.0",
-    "mkdirp": "0.5.1",
-    "mocha": "2.4.5",
-    "nock": "8.0.0",
-    "opn": "4.0.1",
-    "promise": "7.1.1",
-    "rimraf": "2.5.2",
-    "sinon": "1.17.4",
-    "webpack": "1.13.0",
-    "whatwg-fetch": "1.0.0"
+    "browserify": "~13.0.0",
+    "eslint": "~3.3.1",
+    "eslint-config-vizia": "~1.1.2",
+    "http-server": "~0.9.0",
+    "mkdirp": "~0.5.1",
+    "mocha": "~2.4.5",
+    "nock": "~8.0.0",
+    "opn": "~4.0.1",
+    "promise": "~7.1.1",
+    "rimraf": "~2.5.2",
+    "sinon": "~1.17.4",
+    "webpack": "~1.13.0",
+    "whatwg-fetch": "~1.0.0"
   },
   "files": [
     "fetch-node.js",
