@@ -1,5 +1,14 @@
 # History
 
+## 3.0.2
+
+Dependencies now use tilde to allow patch versions to be tracked (this was
+waiting for whatwg-fetch to reach version 1).
+
+## 3.0.1
+
+A link was added to the README to point to the ponyfill definition.
+
 ## 3.0.0
 
 Fixes an issue with detection of features like `URLSearchParams`. This is a
