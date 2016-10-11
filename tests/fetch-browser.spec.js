@@ -14,7 +14,7 @@ describe('fetch in browser', function () {
   var nativeBlob = self.Blob;
 
   beforeEach(function () {
-    sandbox = sinon.sandbox.create({useFakeServer: true});
+    sandbox = sinon.sandbox.create({ useFakeServer: true });
     sandbox.server.autoRespond = true;
     self.fetch = sandbox.stub();
   });
@@ -154,7 +154,7 @@ describe('fetch in browser', function () {
     var fetch;
 
     beforeEach(function () {
-      fetch = fetchWrapper({Promise: ThenPromise});
+      fetch = fetchWrapper({ Promise: ThenPromise });
       sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
       sandbox.server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
       promise = fetch.fetch('https://blah.com/hello.world');
@@ -199,7 +199,7 @@ describe('fetch in browser', function () {
     it('allows whatwg-fetch to feature detect properly', function () {
       self.Blob = function () {};
 
-      var fetch = fetchWrapper({Promise: ThenPromise});
+      var fetch = fetchWrapper({ Promise: ThenPromise });
 
       return fetch.fetch('https://blah.com/goodbye.world')
         .then(function (res) {
