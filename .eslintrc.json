@@ -4,7 +4,7 @@
         "browser": true,
         "amd": true
     },
-    "extends": "vizia",
+    "extends": "qubyte",
     "rules": {
         "strict": "off",
         "no-extra-parens": "off",
