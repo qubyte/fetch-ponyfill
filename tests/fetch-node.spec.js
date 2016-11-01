@@ -155,7 +155,7 @@ describe('fetch in Node', function () {
     var fetch;
 
     before(function () {
-      fetch = fetchWrapper({Promise: ThenPromise});
+      fetch = fetchWrapper({ Promise: ThenPromise });
     });
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
