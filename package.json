@@ -42,7 +42,7 @@
     "sinon": "~1.17.4",
     "testem": "1.12.0",
     "webpack": "~1.13.0",
-    "whatwg-fetch": "~1.0.0"
+    "whatwg-fetch": "~2.0.1"
   },
   "files": [
     "fetch-node.js",
