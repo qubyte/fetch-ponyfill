@@ -8,3 +8,4 @@ Many thanks to the contributors to this project!
  - Friedel Ziegelmayer
  - Robin Millette
  - Sindre Sorhus
+ - Artur Ciocanu
