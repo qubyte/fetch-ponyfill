@@ -1,4 +1,4 @@
-(function () {
+(function (self) {
   'use strict';
 
   function fetchPonyfill(options) {
@@ -34,4 +34,4 @@
   } else {
     self.fetchPonyfill = fetchPonyfill;
   }
-}());
+}(typeof self === 'undefined' ? this : self));
