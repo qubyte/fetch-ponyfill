@@ -9,3 +9,4 @@ Many thanks to the contributors to this project!
  - Robin Millette
  - Sindre Sorhus
  - Artur Ciocanu
+ - Duc Tri Le
