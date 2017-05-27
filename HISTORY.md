@@ -1,5 +1,12 @@
 # History
 
+## 4.0.0
+
+This release:
+
+ - Bumps whatwg-fetch from ~1.0.0 to ~2.0.1.
+ - Better handling of self/this for browser fetch (more testing friendly).
+
 ## 3.0.2
 
 Dependencies now use tilde to allow patch versions to be tracked (this was
