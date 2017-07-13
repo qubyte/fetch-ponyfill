@@ -28,7 +28,7 @@
     "ponyfill"
   ],
   "dependencies": {
-    "node-fetch": "~1.6.0"
+    "node-fetch": "~1.7.1"
   },
   "devDependencies": {
     "browserify": "~13.0.0",
@@ -42,7 +42,7 @@
     "sinon": "~1.17.4",
     "testem": "1.12.0",
     "webpack": "~1.13.0",
-    "whatwg-fetch": "~2.0.1"
+    "whatwg-fetch": "~2.0.3"
   },
   "files": [
     "fetch-node.js",

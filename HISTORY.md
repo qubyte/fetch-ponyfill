@@ -1,5 +1,10 @@
 # History
 
+## 4.1.0
+
+ - Bumps node fetch from ~1.6.0 to ~1.7.1.
+ - Bumps whatwg-fetch from ~2.0.1 to ~2.0.3.
+
 ## 4.0.0
 
 This release:
