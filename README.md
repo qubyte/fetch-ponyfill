@@ -11,7 +11,7 @@ When used in Node, delegates to `node-fetch` instead.
 
 ## Usage
 
-### RequireJS
+### Browserify
 
 ```javascript
 const {fetch, Request, Response, Headers} = require('fetch-ponyfill')(options);
