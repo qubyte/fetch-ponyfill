@@ -11,11 +11,22 @@ When used in Node, delegates to `node-fetch` instead.
 
 ## Usage
 
+### Browserify
+
 ```javascript
 const {fetch, Request, Response, Headers} = require('fetch-ponyfill')(options);
 ```
 
-where options is an object with the following optional properties:
+### Webpack
+
+```javascript
+import fetchPonyfill from 'fetch-ponyfill';
+const {fetch, Request, Response, Headers} = fetchPonyfill(options);
+```
+
+### Options
+
+Where `options` is an object with the following optional properties:
 
 | option | description |
 | ------ | ----------- |
