@@ -6,7 +6,7 @@ function wrapFetchForNode(fetch) {
   // Support schemaless URIs on the server for parity with the browser.
   // https://github.com/matthew-andrews/isomorphic-fetch/pull/10
   return function (u, options) {
-    if (u instanceof fetch.Request) {
+    if (fetch && fetch.Request && u instanceof fetch.Request) {
       return fetch(u, options);
     }
 
@@ -24,6 +24,10 @@ module.exports = function (context) {
   // it work at all.
   if (context && context.Promise) {
     fetch.Promise = context.Promise;
+  }
+
+  if (context && context.useCookie) {
+    fetch = require('fetch-cookie')(fetch);
   }
 
   return {

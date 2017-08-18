@@ -32,3 +32,4 @@ Where `options` is an object with the following optional properties:
 | ------ | ----------- |
 | `Promise` | An A+ Promise implementation. Defaults to `window.Promise` in the browser, and `global.Promise` in Node. |
 | `XMLHttpRequest` | The XMLHttpRequest constructor. This is useful to feed in when working with Firefox OS. Defaults to `window.XMLHttpRequest`. Has no effect in Node. |
+|`useCookie`| A boolean flag that indicates whether `node-fetch` should be wrapped in `fetch-cookie`. `true` indicates that it should be wrapped, `false` otherwise. |
