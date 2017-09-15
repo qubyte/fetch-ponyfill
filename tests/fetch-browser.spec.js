@@ -9,20 +9,21 @@ function responseToText(response) {
 }
 
 describe('fetch in browser', function () {
-  var sandbox;
   var nativeFetch = self.fetch;
   var nativeBlob = self.Blob;
 
+  var server;
+
   beforeEach(function () {
-    sandbox = sinon.sandbox.create({ useFakeServer: true });
-    sandbox.server.autoRespond = true;
-    self.fetch = sandbox.stub();
+    server = sinon.createFakeServer();
+    server.autoRespond = true;
+    self.fetch = sinon.stub();
   });
 
   afterEach(function () {
     self.fetch = nativeFetch;
     self.Blob = nativeBlob;
-    sandbox.restore();
+    server.restore();
   });
 
   describe('when called without a context', function () {
@@ -31,8 +32,8 @@ describe('fetch in browser', function () {
 
     beforeEach(function () {
       fetch = fetchWrapper();
-      sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
-      sandbox.server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
+      server.respondWith('https://blah.com/hello.world', 'Some response text.');
+      server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
       promise = fetch.fetch('https://blah.com/hello.world');
     });
 
@@ -53,7 +54,7 @@ describe('fetch in browser', function () {
     });
 
     it('makes requests', function () {
-      assert.equal(sandbox.server.requests.length, 1);
+      assert.equal(server.requests.length, 1);
     });
 
     it('resolves when the server responds', function () {
@@ -93,8 +94,8 @@ describe('fetch in browser', function () {
 
     beforeEach(function () {
       fetch = fetchWrapper({});
-      sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
-      sandbox.server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
+      server.respondWith('https://blah.com/hello.world', 'Some response text.');
+      server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
       promise = fetch.fetch('https://blah.com/hello.world');
     });
 
@@ -115,7 +116,7 @@ describe('fetch in browser', function () {
     });
 
     it('makes requests', function () {
-      assert.equal(sandbox.server.requests.length, 1);
+      assert.equal(server.requests.length, 1);
     });
 
     it('resolves when the server responds', function () {
@@ -155,8 +156,8 @@ describe('fetch in browser', function () {
 
     beforeEach(function () {
       fetch = fetchWrapper({ Promise: ThenPromise });
-      sandbox.server.respondWith('https://blah.com/hello.world', 'Some response text.');
-      sandbox.server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
+      server.respondWith('https://blah.com/hello.world', 'Some response text.');
+      server.respondWith('https://blah.com/goodbye.world', 'Some other response text.');
       promise = fetch.fetch('https://blah.com/hello.world');
     });
 
@@ -177,7 +178,7 @@ describe('fetch in browser', function () {
     });
 
     it('makes requests', function () {
-      assert.equal(sandbox.server.requests.length, 1);
+      assert.equal(server.requests.length, 1);
     });
 
     it('resolves when the server responds', function () {
