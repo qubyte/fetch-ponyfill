@@ -27,5 +27,5 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# Release assets adding this for now till fetch-ccokie is a part of the main product
+# Release assets adding this for now till fetch-cookie is a part of the main product
 #build
