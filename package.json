@@ -32,17 +32,17 @@
     "fetch-cookie": "~0.6.0"
   },
   "devDependencies": {
-    "browserify": "~14.4.0",
-    "eslint": "~4.7.0",
+    "browserify": "~14.5.0",
+    "eslint": "~4.9.0",
     "eslint-config-qubyte": "~1.1.0",
     "mkdirp": "~0.5.1",
-    "mocha": "~3.5.3",
+    "mocha": "~4.0.0",
     "nock": "~9.0.14",
     "promise": "~8.0.1",
     "rimraf": "~2.6.2",
-    "sinon": "~3.2.1",
+    "sinon": "~4.0.0",
     "testem": "1.18.4",
-    "webpack": "~3.6.0",
+    "webpack": "~3.7.0",
     "whatwg-fetch": "~2.0.3"
   },
   "files": [
