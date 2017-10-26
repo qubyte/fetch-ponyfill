@@ -14,7 +14,7 @@
         }
       });
 
-// {{whatwgFetch}}
+      // {{whatwgFetch}}
 
       return {
         fetch: self.fetch,
