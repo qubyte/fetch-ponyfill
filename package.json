@@ -36,7 +36,7 @@
     "eslint-config-qubyte": "~1.1.0",
     "mkdirp": "~0.5.1",
     "mocha": "~4.0.0",
-    "nock": "~9.0.14",
+    "nock": "~9.1.0",
     "promise": "~8.0.1",
     "rimraf": "~2.6.2",
     "sinon": "~4.1.0",
