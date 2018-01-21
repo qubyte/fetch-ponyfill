@@ -39,7 +39,7 @@
     "nock": "~9.1.0",
     "promise": "~8.0.1",
     "rimraf": "~2.6.2",
-    "sinon": "~4.1.0",
+    "sinon": "~4.2.0",
     "testem": "1.18.4",
     "webpack": "~3.10.0",
     "whatwg-fetch": "~2.0.3"
