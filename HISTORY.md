@@ -1,5 +1,11 @@
 # History
 
+## 5.0.0
+
+ - Bumps node-fetch from ~1.7.1 to ~2.0.0. This is a potentially breaking
+   change. Refer to the node-fetch [upgrade guide](https://github.com/bitinn/node-fetch/blob/master/UPGRADE-GUIDE.md)
+   for details.
+
 ## 4.1.0
 
  - Bumps node fetch from ~1.6.0 to ~1.7.1.
