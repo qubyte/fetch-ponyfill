@@ -18,6 +18,6 @@ var indented = whatwgFetchSource
   .map(indent)
   .join('\n');
 
-var builtSource = wrapperSource.replace('// {{whatwgFetch}}', indented);
+var builtSource = wrapperSource.replace('      // {{whatwgFetch}}', indented);
 
 console.log(builtSource); // eslint-disable-line no-console
