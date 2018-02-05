@@ -30,5 +30,5 @@ package-lock.json
 # Users Environment Variables
 .lock-wscript
 
-# Release assets adding this for now till fetch-ccokie is a part of the main product
-#build
+# Release assets
+build
