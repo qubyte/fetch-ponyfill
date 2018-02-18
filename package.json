@@ -46,6 +46,7 @@
   },
   "files": [
     "fetch-node.js",
-    "build/fetch-browser.js"
+    "build/fetch-browser.js",
+    "index.d.ts"
   ]
 }
