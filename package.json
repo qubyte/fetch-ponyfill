@@ -15,7 +15,7 @@
     "pretest:webpack": "npm run build && webpack tests/fetch-browser.spec.js build/browser-test-bundle.js",
     "test:webpack": "testem",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "author": "Mark Stanley Everitt",
   "repository": {
