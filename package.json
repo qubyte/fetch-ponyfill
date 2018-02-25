@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "pretest:browserify": "npm run build && browserify tests/fetch-browser.spec.js --outfile build/browser-test-bundle.js",
     "test:browserify": "testem",
-    "pretest:webpack": "npm run build && webpack tests/fetch-browser.spec.js build/browser-test-bundle.js",
+    "pretest:webpack": "npm run build && webpack --mode development tests/fetch-browser.spec.js -o build/browser-test-bundle.js",
     "test:webpack": "testem",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
     "prepublishOnly": "npm run build"
@@ -41,7 +41,8 @@
     "rimraf": "~2.6.2",
     "sinon": "~4.4.0",
     "testem": "2.0.0",
-    "webpack": "~3.11.0",
+    "webpack": "~4.0.0",
+    "webpack-cli": "~2.0.9",
     "whatwg-fetch": "~2.0.3"
   },
   "files": [
