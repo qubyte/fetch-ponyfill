@@ -34,4 +34,4 @@
   } else {
     self.fetchPonyfill = fetchPonyfill;
   }
-}(typeof self === 'undefined' ? this : self));
+}(typeof self !== 'undefined' ? self : typeof global !== 'undefined' ? global : this));
