@@ -1,5 +1,9 @@
 # History
 
+## 6.0.0
+
+ - Adjusts the way the global object is sniffed for use with Metro.
+
 ## 5.0.0
 
  - Bumps node-fetch from ~1.7.1 to ~2.0.0. This is a potentially breaking
