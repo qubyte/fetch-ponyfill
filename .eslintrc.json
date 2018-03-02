@@ -6,14 +6,15 @@
     },
     "extends": "qubyte",
     "rules": {
-        "strict": "off",
-        "no-extra-parens": "off",
         "indent": ["error", 2],
+        "no-extra-parens": "off",
+        "no-nested-ternary": "off",
+        "no-sync": "off",
         "no-unused-vars": "off",
-        "no-sync": "off"
+        "strict": "off"
     },
     "globals": {
-      "Promise": true,
-      "XMLHttpRequest": true
+        "Promise": true,
+        "XMLHttpRequest": true
     }
 }
