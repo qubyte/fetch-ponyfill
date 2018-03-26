@@ -1,10 +1,8 @@
-declare module 'fetch-ponyfill' {
-  const pony = FetchPonyfill.fetchPonyfill;
-  export = pony;
-}
+export = fetchPonyfill;
 
-declare namespace FetchPonyfill {
-  function fetchPonyfill(options?: BootstrapOptions): BootstrapRetVal;
+declare function fetchPonyfill(options?: fetchPonyfill.BootstrapOptions): fetchPonyfill.BootstrapRetVal;
+
+declare namespace fetchPonyfill {
   interface BootstrapOptions {
     Promise?: Function;
     XMLHttpRequest?: Function;
