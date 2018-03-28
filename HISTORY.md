@@ -1,5 +1,9 @@
 # History
 
+## 6.0.1
+
+ - Fixes to the TypeScript declaration file.
+
 ## 6.0.0
 
  - Adjusts the way the global object is sniffed for use with Metro.
