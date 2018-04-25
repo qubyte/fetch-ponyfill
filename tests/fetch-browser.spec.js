@@ -73,6 +73,14 @@ describe('fetch in browser', function () {
         });
     });
 
+    it('can consume URL instances', function () {
+      return fetch.fetch(new URL('https://blah.com/goodbye.world'))
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, 'Some other response text.');
+        });
+    });
+
     it('allows whatwg-fetch to feature detect properly', function () {
       self.Blob = function () {};
 
@@ -135,6 +143,14 @@ describe('fetch in browser', function () {
         });
     });
 
+    it('can consume URL instances', function () {
+      return fetch.fetch(new URL('https://blah.com/goodbye.world'))
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, 'Some other response text.');
+        });
+    });
+
     it('allows whatwg-fetch to feature detect properly', function () {
       self.Blob = function () {};
 
@@ -191,6 +207,14 @@ describe('fetch in browser', function () {
 
     it('can consume Request instances', function () {
       return fetch.fetch(new fetch.Request('https://blah.com/goodbye.world'))
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, 'Some other response text.');
+        });
+    });
+
+    it('can consume URL instances', function () {
+      return fetch.fetch(new URL('https://blah.com/goodbye.world'))
         .then(responseToText)
         .then(function (data) {
           assert.equal(data, 'Some other response text.');

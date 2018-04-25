@@ -3,6 +3,7 @@
 'use strict';
 
 var fetchWrapper = require('../fetch-node');
+var URL = require('url').URL;
 var nock = require('nock');
 var assert = require('assert');
 var ThenPromise = require('promise');
@@ -90,6 +91,14 @@ describe('fetch in Node', function () {
           assert.equal(data, good);
         });
     });
+
+    it('supports URL instances', function () {
+      return fetch.fetch(new URL('https://mattandre.ws/succeed.txt'))
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, good);
+        });
+    });
   });
 
   describe('when called with a context with no Promise field', function () {
@@ -149,6 +158,14 @@ describe('fetch in Node', function () {
           assert.equal(data, good);
         });
     });
+
+    it('supports URL instances', function () {
+      return fetch.fetch(new URL('https://mattandre.ws/succeed.txt'))
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, good);
+        });
+    });
   });
 
   describe('when called with a context with a Promise field', function () {
@@ -203,6 +220,14 @@ describe('fetch in Node', function () {
 
     it('supports request instances', function () {
       return fetch.fetch(new fetch.Request('https://mattandre.ws/succeed.txt'))
+        .then(responseToText)
+        .then(function (data) {
+          assert.equal(data, good);
+        });
+    });
+
+    it('supports URL instances', function () {
+      return fetch.fetch(new URL('https://mattandre.ws/succeed.txt'))
         .then(responseToText)
         .then(function (data) {
           assert.equal(data, good);
