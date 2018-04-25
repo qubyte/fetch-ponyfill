@@ -3,7 +3,7 @@
 'use strict';
 
 var fetchWrapper = require('../fetch-node');
-var { URL } = require('url');
+var URL = require('url').URL;
 var nock = require('nock');
 var assert = require('assert');
 var ThenPromise = require('promise');

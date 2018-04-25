@@ -1,7 +1,7 @@
 'use strict';
 
 var fetch = require('node-fetch');
-var { URL } = require('url');
+var URL = require('url').URL;
 
 function wrapFetchForNode(fetch) {
   // Support schemaless URIs on the server for parity with the browser.
