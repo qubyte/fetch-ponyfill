@@ -1,5 +1,9 @@
 # History
 
+## 6.0.2
+
+ - Fixes WHATWG URL object handling when this module is used in Node.
+
 ## 6.0.1
 
  - Fixes to the TypeScript declaration file.
