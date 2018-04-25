@@ -1,6 +1,6 @@
 {
   "name": "fetch-ponyfill",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
   "main": "fetch-node.js",
   "browser": "build/fetch-browser.js",
