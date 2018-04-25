@@ -1,11 +1,16 @@
 'use strict';
 
 var fetch = require('node-fetch');
+var { URL } = require('url');
 
 function wrapFetchForNode(fetch) {
   // Support schemaless URIs on the server for parity with the browser.
   // https://github.com/matthew-andrews/isomorphic-fetch/pull/10
   return function (u, options) {
+    if (u instanceof URL) {
+      return fetch(u, options);
+    }
+
     if (u instanceof fetch.Request) {
       return fetch(u, options);
     }
