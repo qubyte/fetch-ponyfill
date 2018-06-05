@@ -40,7 +40,7 @@
     "promise": "~8.0.1",
     "rimraf": "~2.6.2",
     "sinon": "~5.0.0",
-    "testem": "2.7.0",
+    "testem": "2.7.1",
     "webpack": "~4.11.0",
     "webpack-cli": "~3.0.1",
     "whatwg-fetch": "~2.0.3"
