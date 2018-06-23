@@ -1,4 +1,4 @@
-export = fetchPonyfill;
+export default fetchPonyfill;
 
 declare function fetchPonyfill(options?: fetchPonyfill.BootstrapOptions): fetchPonyfill.BootstrapRetVal;
 
