@@ -42,7 +42,7 @@
     "sinon": "~7.2.4",
     "testem": "2.14.0",
     "webpack": "~4.29.1",
-    "webpack-cli": "~3.2.0",
+    "webpack-cli": "~3.3.0",
     "whatwg-fetch": "~2.0.3"
   },
   "files": [
