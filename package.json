@@ -39,7 +39,7 @@
     "nock": "~10.0.0",
     "promise": "~8.0.1",
     "rimraf": "~2.6.2",
-    "sinon": "~7.2.4",
+    "sinon": "~7.3.0",
     "testem": "2.14.0",
     "webpack": "~4.29.1",
     "webpack-cli": "~3.3.0",
