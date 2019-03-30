@@ -33,7 +33,7 @@
   "devDependencies": {
     "browserify": "~16.2.0",
     "eslint-config-qubyte": "~2.0.0",
-    "eslint": "~5.15.0",
+    "eslint": "~5.16.0",
     "mkdirp": "~0.5.1",
     "mocha": "~6.0.0",
     "nock": "~10.0.0",
