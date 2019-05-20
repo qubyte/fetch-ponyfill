@@ -1,6 +1,6 @@
 'use strict';
 
-var fetch = require('node-fetch');
+var nodeFetch = require('node-fetch').default;
 
 function wrapFetchForNode(fetch) {
   // Support schemaless URIs on the server for parity with the browser.
@@ -21,13 +21,13 @@ module.exports = function (context) {
   // given the way `node-fetch` is implemented, this is the only way to make
   // it work at all.
   if (context && context.Promise) {
-    fetch.Promise = context.Promise;
+    nodeFetch.Promise = context.Promise;
   }
 
   return {
-    fetch: wrapFetchForNode(fetch),
-    Headers: fetch.Headers,
-    Request: fetch.Request,
-    Response: fetch.Response
+    fetch: wrapFetchForNode(nodeFetch),
+    Headers: nodeFetch.Headers,
+    Request: nodeFetch.Request,
+    Response: nodeFetch.Response
   };
 };
