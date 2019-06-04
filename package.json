@@ -4,6 +4,7 @@
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
   "main": "fetch-node.js",
   "browser": "build/fetch-browser.js",
+  "types": "./index.d.ts",
   "config": {
     "web_port": "8088"
   },
