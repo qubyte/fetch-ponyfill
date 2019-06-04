@@ -1,5 +1,10 @@
 # History
 
+## 6.1.0
+
+ - Adds a types field to package.json for TypeScript integration.
+ - Updates node-fetch to 2.6.0
+
 ## 6.0.2
 
  - Fixes WHATWG URL object handling when this module is used in Node.
