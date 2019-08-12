@@ -12,9 +12,9 @@
     "test": "mocha tests/fetch-node.spec.js",
     "lint": "eslint .",
     "pretest:browserify": "npm run build && browserify tests/fetch-browser.spec.js --outfile build/browser-test-bundle.js",
-    "test:browserify": "testem",
+    "test:browserify": "testem ci",
     "pretest:webpack": "npm run build && webpack --mode development tests/fetch-browser.spec.js -o build/browser-test-bundle.js",
-    "test:webpack": "testem",
+    "test:webpack": "testem ci",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
     "prepublishOnly": "npm run build"
   },
