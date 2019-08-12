@@ -1,0 +1,56 @@
+name: CI
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+jobs:
+  test-node:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [8, 10, 12]
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: use node ${{ matrix.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        version: ${{ matrix.node_version }}
+    - run: npm ci
+    - run: npm test
+  test-browserify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: use node 10
+      uses: actions/setup-node@v1
+      with:
+        version: 10.x
+    - run: npm ci
+    - run: npm run test:browserify
+  test-webpack:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: use node 10
+      uses: actions/setup-node@v1
+      with:
+        version: 10.x
+    - run: npm ci
+    - run: npm run test:webpack
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: use node 10
+      uses: actions/setup-node@v1
+      with:
+        version: 10.x
+    - run: npm ci
+    - run: npm run lint
