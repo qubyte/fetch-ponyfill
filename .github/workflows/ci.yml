@@ -21,8 +21,11 @@ jobs:
         version: ${{ matrix.node_version }}
     - run: npm ci
     - run: npm test
-  test-browserify:
+  test-browser:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        bundler: [browserify, webpack]
     steps:
     - name: checkout
       uses: actions/checkout@master
@@ -31,18 +34,7 @@ jobs:
       with:
         version: 10.x
     - run: npm ci
-    - run: npm run test:browserify
-  test-webpack:
-    runs-on: ubuntu-latest
-    steps:
-    - name: checkout
-      uses: actions/checkout@master
-    - name: use node 10
-      uses: actions/setup-node@v1
-      with:
-        version: 10.x
-    - run: npm ci
-    - run: npm run test:webpack
+    - run: npm run test:${{ matrix.bundler }}
   lint:
     runs-on: ubuntu-latest
     steps:
