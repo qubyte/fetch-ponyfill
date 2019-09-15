@@ -18,7 +18,7 @@ jobs:
     - name: use node ${{ matrix.node_version }}
       uses: actions/setup-node@v1
       with:
-        version: ${{ matrix.node_version }}
+        node-version: ${{ matrix.node_version }}
     - run: npm ci
     - run: npm test
   test-browser:
@@ -32,7 +32,7 @@ jobs:
     - name: use node 10
       uses: actions/setup-node@v1
       with:
-        version: 10.x
+        node-version: 10.x
     - run: npm ci
     - run: npm run test:${{ matrix.bundler }}
   lint:
@@ -43,6 +43,6 @@ jobs:
     - name: use node 10
       uses: actions/setup-node@v1
       with:
-        version: 10.x
+        node-version: 10.x
     - run: npm ci
     - run: npm run lint
