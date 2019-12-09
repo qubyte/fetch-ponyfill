@@ -25,7 +25,7 @@ module.exports = function (context) {
   }
 
   return {
-    fetch: wrapFetchForNode(fetch),
+    fetch: wrapFetchForNode(fetch.default),
     Headers: fetch.Headers,
     Request: fetch.Request,
     Response: fetch.Response
