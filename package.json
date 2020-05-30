@@ -15,6 +15,8 @@
     "test:browserify": "testem ci",
     "pretest:webpack": "npm run build && webpack --mode development tests/fetch-browser.spec.js -o build/browser-test-bundle.js",
     "test:webpack": "testem ci",
+    "pretest:webpack:node": "webpack --mode development --target node tests/fetch-node.spec.js -o build/node-test-bundle.js",
+    "test:webpack:node": "mocha build/node-test-bundle.js",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
     "prepublishOnly": "npm run build"
   },
