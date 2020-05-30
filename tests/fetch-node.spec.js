@@ -6,7 +6,7 @@ var fetchWrapper = require('../fetch-node');
 var URL = require('url').URL;
 var nock = require('nock');
 var assert = require('assert');
-var ThenPromise = require('promise');
+var ThenPromise = Promise;
 
 var good = 'hello world. 你好世界。';
 var bad = 'good bye cruel world. 再见残酷的世界。';
