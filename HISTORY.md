@@ -1,5 +1,12 @@
 # History
 
+## 7.0.0
+
+ - Drops support for node 8. Adds node 14 to tests.
+ - Updates whatwg-fetch to ~3.4.1.
+ - Exposes `DOMException` from whatwg-fetch.
+ - Tests against webpack 5 and browserify 17.
+
 ## 6.1.0
 
  - Adds a types field to package.json for TypeScript integration.

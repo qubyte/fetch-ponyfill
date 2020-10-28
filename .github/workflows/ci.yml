@@ -2,19 +2,19 @@ name: CI
 on:
   push:
     branches:
-    - master
+    - main
   pull_request:
     branches:
-    - master
+    - main
 jobs:
   test-node:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node_version: [8, 10, 12]
+        node_version: [10, 12, 14]
     steps:
     - name: checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@main
     - name: use node ${{ matrix.node_version }}
       uses: actions/setup-node@v1
       with:
@@ -28,11 +28,11 @@ jobs:
         bundler: [browserify, webpack, "webpack:node"]
     steps:
     - name: checkout
-      uses: actions/checkout@master
-    - name: use node 10
+      uses: actions/checkout@main
+    - name: use node 14
       uses: actions/setup-node@v1
       with:
-        node-version: 10.x
+        node-version: 14.x
     - run: npm ci
     - run: npm run test:${{ matrix.bundler }}
   lint:
@@ -40,9 +40,9 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@master
-    - name: use node 10
+    - name: use node 14
       uses: actions/setup-node@v1
       with:
-        node-version: 10.x
+        node-version: 14.x
     - run: npm ci
     - run: npm run lint

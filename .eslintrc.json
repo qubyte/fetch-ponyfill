@@ -15,6 +15,7 @@
     },
     "globals": {
         "Promise": true,
-        "XMLHttpRequest": true
+        "XMLHttpRequest": true,
+        "globalThis": true
     }
 }

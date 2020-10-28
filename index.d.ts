@@ -13,5 +13,6 @@ declare namespace fetchPonyfill {
     Headers: typeof Headers;
     Request: typeof Request;
     Response: typeof Response;
+    DOMException: typeof DOMException;
   }
 }
