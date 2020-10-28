@@ -1,7 +1,5 @@
 # Fetch Ponyfill
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/qubyte/fetch-ponyfill.svg)](https://greenkeeper.io/)
-
 > WHATWG `fetch` [ponyfill](https://ponyfill.com)
 
 This module wraps the [github/fetch](https://github.com/github/fetch) polyfill in a CommonJS module
