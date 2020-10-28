@@ -38,7 +38,7 @@ describe('fetch in browser', function () {
     });
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
-      assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+      assert.deepEqual(Object.keys(fetch).sort(), ['DOMException', 'Headers', 'Request', 'Response', 'fetch']);
     });
 
     it('does not expose native fetch when available', function () {
@@ -108,7 +108,7 @@ describe('fetch in browser', function () {
     });
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
-      assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+      assert.deepEqual(Object.keys(fetch).sort(), ['DOMException', 'Headers', 'Request', 'Response', 'fetch']);
     });
 
     it('does not expose native fetch when available', function () {
@@ -178,7 +178,7 @@ describe('fetch in browser', function () {
     });
 
     it('exposes fetch, and Request, Response, and Headers methods', function () {
-      assert.deepEqual(Object.keys(fetch).sort(), ['Headers', 'Request', 'Response', 'fetch']);
+      assert.deepEqual(Object.keys(fetch).sort(), ['DOMException', 'Headers', 'Request', 'Response', 'fetch']);
     });
 
     it('does not expose native fetch when available', function () {

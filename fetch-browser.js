@@ -1,13 +1,12 @@
-(function (self) {
+(function (global) {
   'use strict';
 
   function fetchPonyfill(options) {
-    var Promise = options && options.Promise || self.Promise;
-    var XMLHttpRequest = options && options.XMLHttpRequest || self.XMLHttpRequest;
-    var global = self;
+    var Promise = options && options.Promise || global.Promise;
+    var XMLHttpRequest = options && options.XMLHttpRequest || global.XMLHttpRequest;
 
     return (function () {
-      var self = Object.create(global, {
+      var globalThis = Object.create(global, {
         fetch: {
           value: undefined,
           writable: true
@@ -17,10 +16,11 @@
       // {{whatwgFetch}}
 
       return {
-        fetch: self.fetch,
-        Headers: self.Headers,
-        Request: self.Request,
-        Response: self.Response
+        fetch: globalThis.fetch,
+        Headers: globalThis.Headers,
+        Request: globalThis.Request,
+        Response: globalThis.Response,
+        DOMException: globalThis.DOMException
       };
     }());
   }
@@ -32,6 +32,6 @@
   } else if (typeof exports === 'object') {
     module.exports = fetchPonyfill;
   } else {
-    self.fetchPonyfill = fetchPonyfill;
+    global.fetchPonyfill = fetchPonyfill;
   }
-}(typeof self !== 'undefined' ? self : typeof global !== 'undefined' ? global : this));
+}(typeof globalThis !== 'undefined' ? globalThis : typeof self !== 'undefined' ? self : typeof global !== 'undefined' ? global : this));

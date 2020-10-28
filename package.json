@@ -13,10 +13,10 @@
     "lint": "eslint .",
     "pretest:browserify": "npm run build && browserify tests/fetch-browser.spec.js --outfile build/browser-test-bundle.js",
     "test:browserify": "testem ci",
-    "pretest:webpack": "npm run build && webpack --mode development tests/fetch-browser.spec.js -o build/browser-test-bundle.js",
+    "pretest:webpack": "npm run build && webpack --mode development --entry ./tests/fetch-browser.spec.js -o build/browser-test",
     "test:webpack": "testem ci",
-    "pretest:webpack:node": "webpack --mode development --target node tests/fetch-node.spec.js -o build/node-test-bundle.js",
-    "test:webpack:node": "mocha build/node-test-bundle.js",
+    "pretest:webpack:node": "webpack --mode development --target node --entry ./tests/fetch-node.spec.js -o build/node-test",
+    "test:webpack:node": "mocha build/node-test/main.js",
     "build": "rimraf build && mkdirp build && node build.js > build/fetch-browser.js",
     "prepublishOnly": "npm run build"
   },
@@ -31,22 +31,22 @@
     "ponyfill"
   ],
   "dependencies": {
-    "node-fetch": "~2.6.0"
+    "node-fetch": "~2.6.1"
   },
   "devDependencies": {
-    "browserify": "^16.5.1",
-    "eslint": "~6.8.0",
-    "eslint-config-qubyte": "~3.0.0",
+    "browserify": "^17.0.0",
+    "eslint": "^7.12.1",
+    "eslint-config-qubyte": "^3.0.0",
     "mkdirp": "^1.0.4",
-    "mocha": "^7.1.1",
-    "nock": "^12.0.3",
-    "promise": "~8.1.0",
+    "mocha": "^8.2.0",
+    "nock": "^13.0.4",
+    "promise": "^8.1.0",
     "rimraf": "^3.0.2",
-    "sinon": "^9.0.1",
-    "testem": "3.1.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "whatwg-fetch": "~2.0.3"
+    "sinon": "^9.2.1",
+    "testem": "^3.2.0",
+    "webpack": "^5.3.0",
+    "webpack-cli": "^4.1.0",
+    "whatwg-fetch": "~3.4.1"
   },
   "files": [
     "fetch-node.js",
