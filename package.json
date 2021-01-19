@@ -11,7 +11,7 @@
   "scripts": {
     "test": "mocha tests/fetch-node.spec.js",
     "lint": "eslint .",
-    "pretest:browserify": "npm run build && browserify tests/fetch-browser.spec.js --outfile build/browser-test-bundle.js",
+    "pretest:browserify": "npm run build && browserify tests/fetch-browser.spec.js --outfile build/browser-test/main.js",
     "test:browserify": "testem ci",
     "pretest:webpack": "npm run build && webpack --mode development --entry ./tests/fetch-browser.spec.js -o build/browser-test",
     "test:webpack": "testem ci",
