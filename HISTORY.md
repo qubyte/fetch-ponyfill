@@ -1,5 +1,9 @@
 # History
 
+# 7.1.0
+
+- Updates whatwg-fetch to 3.5.0 to address an issue with IE11.
+
 ## 7.0.0
 
  - Drops support for node 8. Adds node 14 to tests.
