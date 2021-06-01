@@ -35,18 +35,18 @@
   },
   "devDependencies": {
     "browserify": "^17.0.0",
-    "eslint": "^7.12.1",
-    "eslint-config-qubyte": "^3.0.0",
+    "eslint": "^7.27.0",
+    "eslint-config-qubyte": "^4.1.0",
     "mkdirp": "^1.0.4",
-    "mocha": "^8.2.0",
-    "nock": "^13.0.4",
+    "mocha": "^8.4.0",
+    "nock": "^13.1.0",
     "promise": "^8.1.0",
     "rimraf": "^3.0.2",
-    "sinon": "^9.2.1",
-    "testem": "^3.2.0",
-    "webpack": "^5.3.0",
-    "webpack-cli": "^4.1.0",
-    "whatwg-fetch": "^3.5.0"
+    "sinon": "^11.1.1",
+    "testem": "^3.4.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "whatwg-fetch": "^3.6.2"
   },
   "files": [
     "fetch-node.js",
