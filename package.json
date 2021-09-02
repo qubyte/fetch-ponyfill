@@ -31,7 +31,7 @@
     "ponyfill"
   ],
   "dependencies": {
-    "node-fetch": "~2.6.1"
+    "node-fetch": "~3.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
