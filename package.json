@@ -1,6 +1,6 @@
 {
   "name": "fetch-ponyfill",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "A ponyfill (doesn't overwrite the native fetch) for the Fetch specification https://fetch.spec.whatwg.org.",
   "main": "fetch-node.js",
   "browser": "build/fetch-browser.js",
@@ -31,7 +31,7 @@
     "ponyfill"
   ],
   "dependencies": {
-    "node-fetch": "~2.6.1"
+    "node-fetch": "~2.6.7"
   },
   "devDependencies": {
     "browserify": "^17.0.0",

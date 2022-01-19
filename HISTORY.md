@@ -1,5 +1,9 @@
 # History
 
+# 7.2.0
+
+- Updates node-fetch to ~[2.6.7](https://github.com/node-fetch/node-fetch/releases/tag/v2.6.7) - Security patch release
+
 # 7.1.0
 
 - Updates whatwg-fetch to 3.5.0 to address an issue with IE11.
